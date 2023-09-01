@@ -8,21 +8,44 @@ from catalog.models import Product, Category
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        with open('catalog_data.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        product_list = [
+            {
+                "name": "Робот",
+                "description": "Это просто Киборг, без комментариев",
+                "category": "Электроника",
+                "purchase_price": 1000000,
+                "creation_data": "2021-04-22"
+            },
+            {
+                "name": "Гитара",
+                "description": "Нейлоновые струны и классическое звучание",
+                "category": "Музыкальные инструменты",
+                "purchase_price": 6700,
+                "creation_data": "2023-07-26"
+            },
+            {
+                "name": "Подшипник",
+                "description": "Надёжная работа",
+                "category": "Запчасти",
+                "purchase_price": 1500,
+                "creation_data": "2023-08-29"
+            }]
 
-        product_list = []
-        category_list = []
+        category_list = [{
+            "category_name": "Электроника",
+            "category_description": "Список электротехники"
+            },
+            {
+                "category_name": "Запчасти",
+                "category_description": "Список запчастей для техники"
+            },
+            {
+                "category_name": "Музыкальные инструменты",
+                "category_description": "Каталог музыкальных инструментов"
+            }]
 
-        for d in data:
-            d.pop('pk')
-            if d['model'] == 'catalog.product':
-                product_list.append(d)
-            else:
-                category_list.append(d)
+        for product in product_list:
+            Product.objects.create(**product)
 
-        Product.objects.bulk_create(product_list)
-        Category.objects.bulk_create(category_list)
-
-
-
+        for category in category_list:
+            Category.objects.create(**category)
