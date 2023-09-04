@@ -6,7 +6,7 @@
       "name": "Робот",
       "description": "Это просто Киборг, без комментариев",
       "image": "",
-      "category": "Электроника",
+      "category": 1,
       "purchase_price": 1000000,
       "creation_data": "2021-04-22",
       "last_modified": "2023-09-01"
@@ -19,7 +19,7 @@
       "name": "Гитара",
       "description": "Нейлоновые струны и классическое звучание",
       "image": "",
-      "category": "Музыкальные инструменты",
+      "category": 3,
       "purchase_price": 6700,
       "creation_data": "2023-07-26",
       "last_modified": "2023-09-01"
@@ -32,7 +32,7 @@
       "name": "Подшипник",
       "description": "Надёжная работа",
       "image": "",
-      "category": "Запчасти",
+      "category": 2,
       "purchase_price": 1500,
       "creation_data": "2023-08-29",
       "last_modified": "2023-09-01"

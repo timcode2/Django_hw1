@@ -12,21 +12,21 @@ class Command(BaseCommand):
             {
                 "name": "Робот",
                 "description": "Это просто Киборг, без комментариев",
-                "category": "Электроника",
+                "category": 1,
                 "purchase_price": 1000000,
                 "creation_data": "2021-04-22"
             },
             {
                 "name": "Гитара",
                 "description": "Нейлоновые струны и классическое звучание",
-                "category": "Музыкальные инструменты",
+                "category": 3,
                 "purchase_price": 6700,
                 "creation_data": "2023-07-26"
             },
             {
                 "name": "Подшипник",
                 "description": "Надёжная работа",
-                "category": "Запчасти",
+                "category": 2,
                 "purchase_price": 1500,
                 "creation_data": "2023-08-29"
             }]
