@@ -1,27 +1,20 @@
 {% extends 'catalog/base.html' %}
 
-
+{% load my_tags %}
 {% block content %}
 <div class="container">
     <div class="row text-start">
-        <div class="col-lg-9 col-md-6 col-sm-12">
-            <div class="card mb-4 box-shadow">
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <tr>
-                            <td class="w-25">Страна</td>
-                            <td>USA</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">ИНН</td>
-                            <td>91-1144442</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Адрес</td>
-                            <td>Redmond,WA,98052-6399</td>
-                        </tr>
-                    </table>
-                </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <img src="{{ object.image|mymedia }}" class="img-thumbnail" alt="...">
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h3 class="card-title">{{ object }}</h3>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ object.category }}</h6>
+                <h4 class="card-subtitle mb-2 text-body-secondary">{{ object.purchase_price }} ₽</h4>
+                <p class="card-text">{{ object.description }}</p>
+                <p class="card-text-shadow">{{ object.creation_data }}</p>
+                <p class="card-text-shadow">{{ object.last_modified }}</p>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
@@ -45,13 +38,14 @@
                         <div class="mb-3">
                             <label for="message">Сообщение</label>
                             <textarea type="text" name="message" class="form-control" id="message"
-                                      placeholder="Контактный телефон" required></textarea>
+                                      placeholder="Ваше сообщение" required></textarea>
                         </div>
                     </form>
-                    <input type="submit">
+
                     <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Отправить</button>
                 </div>
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}

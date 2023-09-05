@@ -1,11 +1,35 @@
 [
   {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "category_name": "Электроника",
+      "category_description": "Список электротехники"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "category_name": "Запчасти",
+      "category_description": "Список запчастей для техники"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "category_name": "Музыкальные инструменты",
+      "category_description": "Каталог музыкальных инструментов"
+    }
+  },
+  {
     "model": "catalog.product",
     "pk": 1,
     "fields": {
       "name": "Робот",
       "description": "Это просто Киборг, без комментариев",
-      "image": "",
+      "image": "catalog/zayac.jpg",
       "category": 1,
       "purchase_price": 1000000,
       "creation_data": "2021-04-22",
@@ -39,27 +63,42 @@
     }
   },
   {
-    "model": "catalog.category",
-    "pk": 1,
+    "model": "catalog.product",
+    "pk": 4,
     "fields": {
-      "category_name": "Электроника",
-      "category_description": "Список электротехники"
+      "name": "Укулеле",
+      "description": "Гавайская гитара",
+      "image": "",
+      "category": 3,
+      "purchase_price": 3500,
+      "creation_data": "2023-09-05",
+      "last_modified": "2023-09-05"
     }
   },
   {
-    "model": "catalog.category",
-    "pk": 2,
+    "model": "catalog.product",
+    "pk": 5,
     "fields": {
-      "category_name": "Запчасти",
-      "category_description": "Список запчастей для техники"
+      "name": "Двигатель",
+      "description": "Двигатель V-8",
+      "image": "",
+      "category": 2,
+      "purchase_price": 54000,
+      "creation_data": "2023-09-05",
+      "last_modified": "2023-09-05"
     }
   },
   {
-    "model": "catalog.category",
-    "pk": 3,
+    "model": "catalog.product",
+    "pk": 6,
     "fields": {
-      "category_name": "Музыкальные инструменты",
-      "category_description": "Каталог музыкальных инструментов"
+      "name": "Кирпич",
+      "description": "Это баааааза!",
+      "image": "catalog/fe66c63e25ea9f4f73e490fe41ae1409.jpg",
+      "category": 2,
+      "purchase_price": 99,
+      "creation_data": "2023-09-05",
+      "last_modified": "2023-09-05"
     }
   }
 ]
