@@ -1,0 +1,13 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">{{ object }}</h1>
+        <div class="">
+            <img src="media/images/previews/{{ object.preview }}" class="img-thumbnail" alt="...">
+        </div>
+        <p class="text-left">{{ object.content }}</p>
+        <p class="text-left">{{ object.views_counter}} просмотров</p>
+    </div>
+
+{% endblock %}
