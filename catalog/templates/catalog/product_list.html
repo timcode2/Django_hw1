@@ -2,22 +2,30 @@
 
 
 {% block content %}
+<div class="col mb-3">
+    <a href="{% url 'product_create' %}" type="button" class="btn btn-primary">Создать новый
+        продукт</a>
+</div>
 <div class="container">
     <div class="row text-center">
         {% for object in object_list %}
-            <div class="col-3">
-                <div class="card mb-4 box-shadow">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">{{ object }}</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{ object.purchase_price }} ₽</h1>
-                        <p class="text-center">{{ object.description | truncatechars:100 }}</p>
-                        <a class="p-2 btn btn-outline-primary" href="{% url 'product' object.pk %}">Посмотреть</a>
-                        <a class="p-2 btn btn-outline-primary" href="#">Купить</a>
-                    </div>
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ object }}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ object.purchase_price }} ₽</h1>
+                    <p class="text-center">{{ object.description | truncatechars:100 }}</p>
+                    <a class="p-2 btn btn-outline-primary" href="{% url 'product' object.pk %}">Посмотреть</a>
+                    <a class="p-2 btn btn-outline-primary" href="#">Купить</a>
+                    <a class="p-2 btn btn-outline-primary btn-sm"
+                       href="{% url 'product_edit' object.pk %}">Изменить</a>
+                    <a class="p-2 btn btn-outline-danger btn-sm"
+                       href="{% url 'product_delete' object.pk %}">Удалить</a>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
-{% endblock %}
+    {% endblock %}
