@@ -46,7 +46,7 @@
       "category": 3,
       "purchase_price": 6700,
       "creation_data": "2023-07-26",
-      "last_modified": "2023-09-01"
+      "last_modified": "2023-09-29"
     }
   },
   {
@@ -99,6 +99,19 @@
       "purchase_price": 99,
       "creation_data": "2023-09-05",
       "last_modified": "2023-09-05"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 16,
+    "fields": {
+      "name": "Тест",
+      "description": "тест",
+      "image": "",
+      "category": 2,
+      "purchase_price": 20203,
+      "creation_data": "2001-10-10",
+      "last_modified": "2023-09-29"
     }
   }
 ]
