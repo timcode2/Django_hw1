@@ -1,4 +1,5 @@
 import random
+import secrets
 
 from django.conf import settings
 from django.contrib.auth.views import LoginView as BaseLoginView
@@ -23,18 +24,32 @@ class LogoutView(BaseLogoutView):
 class RegisterView(CreateView):
     model = User
     form_class = UserRegisterForm
-    success_url = reverse_lazy('users:login')
+    success_url = reverse_lazy('users:email_verify')
     template_name = 'users/register.html'
 
     def form_valid(self, form):
-        self.object = form.save()
+        self.object = form.save(commit=False)
+        token = secrets.token_urlsafe(nbytes=16)
+
+        self.object.verif = token
+        self.object.save()
+
+        url = reverse('users:email_verify', args=[token])
         send_mail(
-            subject='Вы успешно зарегистрировались',
-            message='Теперь вам доступны самые топовые товары',
+            subject='Подтверждение регистрации',
+            message=f'Для подтверждения регистрации перейдите по ссылке: http://127.0.0.1:8000/{url}',
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[self.object.email],
         )
+        self.object.save()
         return super().form_valid(form)
+
+
+def verify(request, token):
+    user = User.objects.get(verif=token)
+    user.is_active = True
+    user.save()
+    return redirect(reverse('users:profile'))
 
 
 class UserUpdateView(UpdateView):
