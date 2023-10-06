@@ -28,28 +28,30 @@ class RegisterView(CreateView):
     template_name = 'users/register.html'
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
+        user = form.save(commit=False)
         token = secrets.token_urlsafe(nbytes=16)
 
-        self.object.verif = token
-        self.object.save()
+        user.token = token
 
-        url = reverse('users:email_verify', args=[token])
+        url = reverse_lazy('users:email_confirm', kwargs={'token': user.token})
         send_mail(
             subject='Подтверждение регистрации',
             message=f'Для подтверждения регистрации перейдите по ссылке: http://127.0.0.1:8000/{url}',
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[self.object.email],
+            recipient_list=[user.email],
+            fail_silently=False
         )
-        self.object.save()
-        return super().form_valid(form)
+        user.save()
+
+        return redirect('users:login')
 
 
 def verify(request, token):
-    user = User.objects.get(verif=token)
+    user = User.objects.get(token=token)
     user.is_active = True
+    user.token = None
     user.save()
-    return redirect(reverse('users:profile'))
+    return redirect('users:login')
 
 
 class UserUpdateView(UpdateView):
