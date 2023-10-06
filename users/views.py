@@ -7,7 +7,8 @@ from django.contrib.auth.views import LogoutView as BaseLogoutView
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, UpdateView
+from django.views import View
+from django.views.generic import CreateView, UpdateView, TemplateView
 
 from users.forms import UserRegisterForm, UserForm
 from users.models import User
@@ -43,15 +44,33 @@ class RegisterView(CreateView):
         )
         user.save()
 
+        return redirect('users:email_sent')
+
+
+class UserConfirmEmailView(View):
+    def get(self, request, token):
+        user = User.objects.get(token=token)
+        user.is_active = True
+        user.token = None
+        user.save()
         return redirect('users:login')
 
 
-def verify(request, token):
-    user = User.objects.get(token=token)
-    user.is_active = True
-    user.token = None
-    user.save()
-    return redirect('users:login')
+class EmailConfirmationSentView(TemplateView):
+    template_name = 'users/email_verify.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class EmailConfirmView(TemplateView):
+    template_name = 'users/verified.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Ваш электронный адрес активирован'
+        return context
 
 
 class UserUpdateView(UpdateView):
@@ -59,7 +78,7 @@ class UserUpdateView(UpdateView):
     success_url = reverse_lazy('users:profile')
     form_class = UserForm
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         return self.request.user
 
 
